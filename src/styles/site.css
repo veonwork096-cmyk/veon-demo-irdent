@@ -57,7 +57,7 @@ a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .logo { display: inline-flex; align-items: center; min-height: 44px; flex: none; }
 .logo__mark {
   display: block; width: 104px; aspect-ratio: 288 / 105;
-  -webkit-mask: url("/img/logo-irdent.png") center / contain no-repeat; mask: url("/img/logo-irdent.png") center / contain no-repeat;
+  -webkit-mask: url("../assets/img/logo-irdent.png") center / contain no-repeat; mask: url("../assets/img/logo-irdent.png") center / contain no-repeat;
   background-color: var(--color-text);
 }
 .logo--paper .logo__mark { background-color: var(--color-on-ink); }

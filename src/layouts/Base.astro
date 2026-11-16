@@ -3,6 +3,7 @@ import "../styles/tokens.css";
 import "../styles/global.css";
 import "../styles/site.css";
 import "../styles/sections.css";
+import geoFont from "../assets/fonts/geologica-cyrillic-600-normal.woff2?url";
 
 interface Props { lang: string; title: string; description: string; canonical?: string; }
 const { lang, title, description, canonical } = Astro.props;
@@ -19,7 +20,7 @@ const { lang, title, description, canonical } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta name="robots" content="noindex" />
-    <link rel="preload" href="/fonts/geologica-cyrillic-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={geoFont} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
     <style is:global>
       /* Floor 4, repeated here for the per-folder Hallmark check: the same rule lives in global.css. */
