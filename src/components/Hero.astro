@@ -1,0 +1,34 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { clinic } from "../data/clinic";
+---
+<Section id="hero" class="hero" rec="W-R001,W-R008,W-R009,P-R001,P-R009,SEO-R001,SEO-R004,S-R011,S-RM08">
+  <div class="container hero__grid">
+    <div class="hero__main">
+      <h1 class="hero__title">Стоматологія в Ужгороді</h1>
+      <p class="hero__lead">IrDent на Заньковецької, 48а. Ціну видно ще до дзвінка.</p>
+      <div class="hero__action">
+        <a class="btn btn--primary btn--lg" href={clinic.phoneHref} data-rec="W-R001">
+          <Icon name="phone" size={22} />Зателефонувати
+        </a>
+        <p class="hero__hours">{clinic.hours}</p>
+      </div>
+    </div>
+
+    <div class="hero__aside" role="group" aria-label="Ціна консультації й адреса">
+      <p class="hero__price">
+        <span class="hero__figure">500</span>
+        <span class="hero__unit">грн</span>
+        <span class="hero__caption">Консультація й огляд</span>
+      </p>
+      <div class="hero__place">
+        <p class="hero__address">{clinic.addressFull}</p>
+        <a class="link-route" href={clinic.routeHref} target="_blank" rel="noopener">
+          <Icon name="route" size={20} />Прокласти маршрут
+        </a>
+        <p class="hero__rating" data-rec="W-R005">Рейтинг {clinic.rating.value} з 5, {clinic.rating.count} відгуків у каталозі {clinic.rating.source}</p>
+      </div>
+    </div>
+  </div>
+</Section>

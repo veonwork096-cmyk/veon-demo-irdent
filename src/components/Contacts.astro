@@ -1,0 +1,41 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { clinic } from "../data/clinic";
+---
+<Section id="contacts" class="section contacts" rec="W-R008,W-R005">
+  <div class="container">
+    <h2 class="contacts__phone">
+      <span class="visually-hidden">Контакти. Телефон: </span>
+      <a class="contacts__num" href={clinic.phoneHref}>{clinic.phoneDisplay}</a>
+    </h2>
+    <div class="contacts__cols">
+      <div class="contacts__col">
+        <h3 class="contacts__label">Години</h3>
+        <p>{clinic.hours}</p>
+        <p class="muted">Запис за телефоном {clinic.phoneFull}</p>
+      </div>
+      <div class="contacts__col">
+        <h3 class="contacts__label">Адреса</h3>
+        <p>{clinic.addressFull}</p>
+      </div>
+      <div class="contacts__col">
+        <h3 class="contacts__label">Соцмережі</h3>
+        <ul class="social">
+          <li><a class="social__link" href={clinic.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={22} />Instagram</a></li>
+          <li><a class="social__link" href={clinic.facebook} target="_blank" rel="noopener"><Icon name="facebook" size={22} />Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="contacts__actions">
+      <a class="btn btn--primary btn--lg" href={clinic.phoneHref}><Icon name="phone" size={22} />Зателефонувати</a>
+      <a class="btn btn--outline btn--lg" href={clinic.routeHref} target="_blank" rel="noopener"><Icon name="route" size={22} />Прокласти маршрут</a>
+    </div>
+    <p class="contacts__rating">Рейтинг {clinic.rating.value} з 5, {clinic.rating.count} відгуків у каталозі {clinic.rating.source}</p>
+  </div>
+</Section>
+
+<style>
+  /* Floor 5 at the component: the display-size number may wrap at 320 px. */
+  .contacts__phone, .contacts__num { overflow-wrap: break-word; min-width: 0; }
+</style>

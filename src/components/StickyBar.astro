@@ -1,0 +1,22 @@
+---
+// Mobile only: one sticky bar «Зателефонувати / Маршрут» after the hero, hidden while #contacts is on screen (W-R002).
+import Icon from "./Icon.astro";
+import { clinic } from "../data/clinic";
+---
+<div class="callbar" data-callbar data-rec="W-R002">
+  <a class="btn btn--primary callbar__call" href={clinic.phoneHref}><Icon name="phone" size={20} />Зателефонувати</a>
+  <a class="btn btn--outline callbar__route" href={clinic.routeHref} target="_blank" rel="noopener"><Icon name="route" size={20} />Маршрут</a>
+</div>
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-callbar]");
+  const hero = document.getElementById("hero");
+  const contacts = document.getElementById("contacts");
+  if (bar && hero && contacts && "IntersectionObserver" in window) {
+    bar.classList.add("is-armed");
+    let heroOn = true;
+    let contactsOn = false;
+    const sync = () => bar.classList.toggle("is-shown", !heroOn && !contactsOn);
+    new IntersectionObserver(([e]) => { heroOn = e.isIntersecting; sync(); }).observe(hero);
+    new IntersectionObserver(([e]) => { contactsOn = e.isIntersecting; sync(); }).observe(contacts);
+  }
+</script>

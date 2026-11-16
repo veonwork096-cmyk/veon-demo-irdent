@@ -1,0 +1,31 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { clinic, firstVisit } from "../data/clinic";
+---
+<Section id="first-visit" class="section first-visit" rec="W-R004">
+  <div class="container">
+    <h2 class="first-visit__title">Чотири способи прийти вперше</h2>
+    <ul class="first-visit__prices">
+      {firstVisit.map((v) => (
+        <li class="visit">
+          <p class="visit__price"><span class="visit__num">{v.price}</span> <span class="visit__unit">грн</span></p>
+          <p class="visit__label">{v.label}</p>
+        </li>
+      ))}
+    </ul>
+    <div class="first-visit__foot">
+      <ol class="steps" aria-label="Як проходить перший візит">
+        <li>Дзвінок</li>
+        <li>Консультація і діагностика</li>
+        <li>План лікування</li>
+      </ol>
+      <div class="first-visit__action">
+        <a class="btn btn--ink btn--lg" href={clinic.phoneHref}>
+          <Icon name="phone" size={22} />Зателефонувати
+        </a>
+        <p class="first-visit__hours">{clinic.hours}</p>
+      </div>
+    </div>
+  </div>
+</Section>

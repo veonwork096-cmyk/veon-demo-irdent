@@ -1,0 +1,43 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { directions, alsoDirections, futureNote } from "../data/clinic";
+---
+<Section id="services" class="section services" rec="W-R003,S-R012">
+  <div class="container services__grid">
+    <div class="services__head">
+      <h2>Ціни з прайсу клініки</h2>
+      <p class="services__lead">Точний план і суму лікар називає після огляду. Нижче ціни з опублікованого прайсу клініки.</p>
+      <FutureLink note={futureNote} class="services__all">Повний прайс</FutureLink>
+    </div>
+
+    <div class="services__list">
+      {directions.map((d, i) => (
+        <details class="price" open={i === 0}>
+          <summary class="price__summary">
+            <h3 class="price__title">{d.title}</h3>
+            <span class="price__scope">{d.scope}</span>
+            <span class="price__from">{d.from}</span>
+            <Icon name="chevron" class="price__chevron" />
+          </summary>
+          <div class="price__body">
+            <ul class="price__rows">
+              {d.rows.map((r) => (
+                <li class="price__row"><span>{r.name}</span><span class:list={["price__value", !/\d/.test(r.price) && "price__value--none"]}>{r.price}</span></li>
+              ))}
+            </ul>
+            <FutureLink note={futureNote} class="price__more">Відкрити сторінку напряму</FutureLink>
+          </div>
+        </details>
+      ))}
+      <div class="services__also">
+        <h3 class="services__also-title">Також у клініці</h3>
+        <ul class="services__also-list">
+          {alsoDirections.map((t) => <li>{t}</li>)}
+        </ul>
+        <p class="price__note">Ціни цих послуг у повному прайсі.</p>
+      </div>
+    </div>
+  </div>
+</Section>

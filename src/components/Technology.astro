@@ -1,0 +1,33 @@
+---
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import steril from "../assets/img/steril.jpg";
+import { facts } from "../data/clinic";
+---
+<Section id="technology" class="section technology" rec="W-R005,P-R005,P-R008">
+  <div class="container technology__grid">
+    <div class="technology__media">
+      <Picture
+        src={steril}
+        formats={["avif", "webp"]}
+        widths={[420, 720, 1105]}
+        sizes="(min-width: 64rem) 50vw, 100vw"
+        alt="Робоче місце в клініці IrDent, де інструменти запаковують у пакети для стерилізації"
+        loading="lazy"
+        decoding="async"
+        class="technology__img"
+      />
+    </div>
+    <div class="technology__body">
+      <h2>Технології й стерильність у цифрах</h2>
+      <ul class="facts">
+        {facts.map((f, i) => (
+          <li class="fact" data-reveal style={`--reveal-delay: ${i * 40}ms`}>
+            <span class="fact__figure">{f.figure}</span>
+            <span class="fact__text">{f.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>

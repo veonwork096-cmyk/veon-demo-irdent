@@ -1,0 +1,105 @@
+---
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import { clinic, futureNote } from "../data/clinic";
+
+const anchors = [
+  { href: "#services", label: "Послуги і ціни" },
+  { href: "#first-visit", label: "Перший візит" },
+  { href: "#technology", label: "Технології" },
+  { href: "#team", label: "Лікарі" },
+  { href: "#contacts", label: "Контакти" },
+];
+---
+<header class="site-header" data-rec="W-R002">
+  <div class="container site-header__row">
+    <Logo />
+
+    <nav class="site-nav" aria-label="Розділи сторінки">
+      <ul>
+        {anchors.map((a) => <li><a class="site-nav__link" href={a.href}>{a.label}</a></li>)}
+        <li><FutureLink note={futureNote} class="site-nav__future">Роботи</FutureLink></li>
+      </ul>
+    </nav>
+
+    <div class="site-header__end">
+      <div class="lang" aria-label="Мова сайту" role="group">
+        <span class="lang__item lang__item--current" aria-current="true">UA</span>
+        <FutureLink note={futureNote} class="lang__item">RU</FutureLink>
+      </div>
+      <a class="btn btn--primary btn--header" href={clinic.phoneHref}>
+        <Icon name="phone" size={20} />
+        <span class="btn--header__num">{clinic.phoneDisplay}</span><span class="btn--header__short">Подзвонити</span>
+      </a>
+
+      <details class="menu" data-menu>
+        <summary class="menu__toggle" aria-label="Меню">
+          <Icon name="menu" class="menu__open" />
+          <Icon name="close" class="menu__close" />
+        </summary>
+        <div class="menu__panel">
+          <nav aria-label="Меню">
+            <ul class="menu__list">
+              {anchors.map((a) => <li><a class="menu__link" href={a.href}>{a.label}</a></li>)}
+            </ul>
+          </nav>
+          <ul class="menu__future">
+            <li><FutureLink note={futureNote}>Повний прайс</FutureLink></li>
+            <li><FutureLink note={futureNote}>Роботи</FutureLink></li>
+            <li><FutureLink note={futureNote}>RU</FutureLink></li>
+          </ul>
+          <a class="btn btn--primary btn--block" href={clinic.phoneHref}>
+            <Icon name="phone" size={20} />Зателефонувати
+          </a>
+          <p class="menu__hours">{clinic.hours}</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+<script>
+  // Mobile menu: close the <details> first, then scroll to the anchor. Scrollspy: mark the section in the middle band,
+  // clear every mark while the hero (no menu item) is there.
+  const menu = document.querySelector<HTMLDetailsElement>("[data-menu]");
+  if (menu) {
+    menu.addEventListener("click", (e) => {
+      const a = (e.target as Element).closest<HTMLAnchorElement>("a[href^='#']");
+      if (!a) return;
+      const target = document.querySelector<HTMLElement>(a.getAttribute("href") || "");
+      menu.open = false;
+      if (!target) return;
+      e.preventDefault();
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        history.pushState(null, "", a.getAttribute("href"));
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      });
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.open) { menu.open = false; menu.querySelector("summary")?.focus(); }
+    });
+  }
+
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".site-nav__link")];
+  const hero = document.getElementById("hero");
+  if ("IntersectionObserver" in window && links.length) {
+    const mark = (id: string | null) => links.forEach((l) => {
+      if (id && l.getAttribute("href") === `#${id}`) l.setAttribute("aria-current", "true");
+      else l.removeAttribute("aria-current");
+    });
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        mark(e.target === hero ? null : e.target.id);
+      }
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    if (hero) io.observe(hero);
+    links.forEach((l) => { const t = document.querySelector(l.getAttribute("href") || ""); if (t) io.observe(t); });
+  }
+</script>
+
+<style>
+  .btn--header { white-space: nowrap; }
+</style>

@@ -1,0 +1,105 @@
+/* Hallmark · shape: index of facts · genre: editorial · theme: custom · job: book · idea: "Все видно до дзвінка: номер, ціна, доза й імена набрані крупно, кольори — форма і стіна клініки" · vibe: "точна, світла, тепла сімейна клініка"
+ * paper: #F3F5F2 · accent: #EA6315 · display: Geologica · body: Golos Text · hero: H1 зліва, кнопка дзвінка з годинами, справа 500 грн графічним числом, адреса й рейтинг · nav: логотип, 5 якорів, номер-кнопка · footer: вузька графітова смуга з контактами · imagery: client photos · signature: номер телефону дисплейним розміром як посилання
+ * axes: light/geometric-sans/chromatic-orange · posture: full-palette · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: imagery, doctor photos are 743 px so they stay at most ~370 CSS px and the type carries the page */
+/* Hallmark · answered F4 · the ink button lives only on the orange first-visit field where an orange button would vanish; concept.md names it, elsewhere the orange call button is the one primary */
+/* Hallmark · waive 39b · a.btn 56px at 1440 · concept.md sets the call buttons at 56 px: one-tap call is the only booking channel, the big target is the point */
+/* Line 1 of this file is the Hallmark stamp (docs/process/hallmark.md), filled from design/concept.md. */
+
+/* Self-hosted fonts (@fontsource files copied to public/fonts): Cyrillic + Latin subsets only, font-display: swap. */
+@font-face { font-family: "Geologica"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/geologica-cyrillic-600-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Geologica"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/geologica-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Geologica"; font-style: normal; font-weight: 300; font-display: swap; src: url("/fonts/geologica-cyrillic-300-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Geologica"; font-style: normal; font-weight: 300; font-display: swap; src: url("/fonts/geologica-latin-300-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/golos-text-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Golos Text"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/golos-text-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* Client design tokens: only from design/concept.md (veon-concept colors, fonts; «Дизайн-система для FULL»). */
+:root {
+  /* Colour roles */
+  --color-bg: #F3F5F2;          /* paper */
+  --color-bg-2: #E6EAE4;        /* paper-2, «лунка» technology */
+  --color-text: #1C2420;        /* ink */
+  --color-muted: #55605A;       /* muted text, only on paper / paper-2 */
+  --color-rule: #C9CFC8;        /* hairlines, decorative */
+  --color-accent: #EA6315;      /* «Форма»: call button, first-visit field; text on it only ink */
+  --color-accent-ink: #1C2420;  /* text on accent (ink, 4.76:1) */
+  --color-accent-text: #B8470A; /* links as text on light */
+  --color-field: #CED66B;       /* «Стіна»: team field; text on it only ink */
+  --color-on-ink: #F3F5F2;      /* text on ink */
+  --color-on-ink-muted: #A9B3AD;/* secondary text on ink */
+
+  /* Type */
+  --font-display: "Geologica", system-ui, sans-serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --fs-small: 0.9375rem;
+  --fs-body: 1rem;
+  --fs-lead: 1.25rem;
+  --fs-title: 1.25rem;
+  --fs-row: 1.25rem;
+  --fs-h2: 2rem;
+  --fs-display: clamp(2.25rem, 0.25rem + 10vw, 2.75rem);
+  --fs-figure: clamp(3.5rem, 2rem + 6vw, 4.5rem);
+  --fs-fact: 2rem;
+  --fs-phone: clamp(2.125rem, 0.5rem + 8.4vw, 9rem);
+  --lh-tight: 1.02;
+  --lh-head: 1.1;
+  --lh-body: 1.6;
+  --track-head: -0.02em;
+  --w-display: 600;
+  --w-figure: 300;
+
+  /* Space (4/8 scale) */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 40px; --s-7: 64px; --s-8: 96px; --s-9: 144px;
+  --section-y: var(--s-7);
+  --gutter: 24px;
+  --gap: 24px;
+  --space: var(--gutter);
+  --container: 1360px;
+  --header-h: 64px;
+  --bar-h: 72px;
+  --tap: 56px;
+
+  /* Shape */
+  --radius: 8px;
+  --radius-btn: 12px;
+  --hair: 1px;
+  --stroke: 1.5px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --dur-press: 120ms;
+  --dur-ui: 220ms;
+  --dur: 420ms;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 48px;
+    --fs-body: 1.0625rem;
+    --fs-h2: 2.5rem;
+    --fs-title: 1.5rem;
+    --fs-lead: 1.375rem;
+    --fs-row: 1.5rem;
+    --fs-display: clamp(2.75rem, 6.4vw, 5.75rem);
+    --fs-figure: clamp(5rem, 11vw, 10rem);
+    --fs-fact: 2.5rem;
+    --section-y: var(--s-8);
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 72px;
+    --fs-h2: 3rem;
+    --fs-row: 1.75rem;
+    --fs-lead: 1.5rem;
+    --fs-fact: 2.5rem;
+    --section-y: var(--s-9);
+  }
+}
+
+@media (min-width: 90rem) {
+  :root { --gutter: 80px; }
+}

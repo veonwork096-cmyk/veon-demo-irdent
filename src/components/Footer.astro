@@ -1,0 +1,21 @@
+---
+import Logo from "./Logo.astro";
+import FutureLink from "./FutureLink.astro";
+import { clinic, futureNote } from "../data/clinic";
+---
+<footer class="site-footer">
+  <div class="container site-footer__row">
+    <Logo tone="paper" />
+    <ul class="site-footer__facts">
+      <li><a class="site-footer__phone" href={clinic.phoneHref}>{clinic.phoneFull}</a></li>
+      <li>{clinic.addressFull}</li>
+      <li>{clinic.hours}</li>
+    </ul>
+    <ul class="site-footer__future">
+      <li><FutureLink note={futureNote}>Прайс</FutureLink></li>
+      <li><FutureLink note={futureNote}>Роботи</FutureLink></li>
+      <li><FutureLink note={futureNote}>Політика конфіденційності</FutureLink></li>
+      <li><FutureLink note={futureNote}>RU</FutureLink></li>
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,9 @@
+---
+// Client logo (white PNG from the client's site) drawn through a CSS mask so it takes the ink or paper token.
+// It always leads to the top of this page, never to the client's current site.
+interface Props { tone?: "ink" | "paper"; }
+const { tone = "ink" } = Astro.props;
+---
+<a class:list={["logo", `logo--${tone}`]} href="#top" aria-label="IrDent, на початок сторінки">
+  <span class="logo__mark" aria-hidden="true"></span>
+</a>

@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import FirstVisit from "../components/FirstVisit.astro";
+import Technology from "../components/Technology.astro";
+import Team from "../components/Team.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import StickyBar from "../components/StickyBar.astro";
+import { clinic } from "../data/clinic";
+
+const title = "Стоматологія в Ужгороді — IrDent, Заньковецької, 48а | ціни";
+const description = "Стоматологія повного циклу в Ужгороді: терапія, імплантація, ортодонтія, дитяча. Консультація 500 грн. Пн–Пт 09:00–18:00, +38 066 298 69 03.";
+
+// JSON-LD: only facts from veon/client.json (C-B001, socials). No rating until the client confirms the source.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: clinic.name,
+  telephone: "+380662986903",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "вул. Заньковецької, 48а",
+    addressLocality: "Ужгород",
+    addressCountry: "UA",
+  },
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  }],
+  priceRange: "₴₴",
+  sameAs: [clinic.instagram, clinic.facebook],
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header slot="header" />
+  <Hero />
+  <Services />
+  <FirstVisit />
+  <Technology />
+  <Team />
+  <Contacts />
+  <Footer slot="footer" />
+  <StickyBar slot="footer" />
+</Base>

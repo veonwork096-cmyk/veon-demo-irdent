@@ -1,0 +1,52 @@
+---
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import tregubova from "../assets/img/tregubova.jpg";
+import beznoskov from "../assets/img/beznoskov.jpg";
+import mashuk from "../assets/img/mashuk.jpg";
+import { doctors, futureNote } from "../data/clinic";
+
+const photos = { beznoskov, mashuk } as const;
+---
+<Section id="team" class="section team" rec="W-R005,P-R008">
+  <div class="container">
+    <div class="team__head">
+      <h2>Лікує засновниця і ще двоє лікарів</h2>
+      <FutureLink note={futureNote} class="team__all">Усі лікарі</FutureLink>
+    </div>
+    <ul class="team__grid">
+      <li class="doctor doctor--lead">
+        <Picture
+          src={tregubova}
+          formats={["avif", "webp"]}
+          widths={[372, 560, 743]}
+          sizes="(min-width: 64rem) 560px, 100vw"
+          alt={`${doctors.lead.name} у помаранчевій формі клініки IrDent`}
+          loading="lazy"
+          decoding="async"
+          class="doctor__img"
+        />
+        <h3 class="doctor__name">{doctors.lead.name}</h3>
+        <p class="doctor__role">{doctors.lead.role}</p>
+        <p class="doctor__spec">{doctors.lead.spec}</p>
+      </li>
+      {doctors.others.map((d) => (
+        <li class="doctor">
+          <Picture
+            src={photos[d.key]}
+            formats={["avif", "webp"]}
+            widths={[280, 420, 600]}
+            sizes="(min-width: 64rem) 300px, 50vw"
+            alt={d.name}
+            loading="lazy"
+            decoding="async"
+            class="doctor__img doctor__img--portrait"
+          />
+          <h3 class="doctor__name">{d.name}</h3>
+          <p class="doctor__role">{d.role}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
